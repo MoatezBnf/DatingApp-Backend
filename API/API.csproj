@@ -6,9 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>367f7ada-7be5-42aa-b65a-3f3089bf9954</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>API.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12">
       <PrivateAssets>all</PrivateAssets>
