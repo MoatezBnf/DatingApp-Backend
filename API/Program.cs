@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 
 namespace API
 {
@@ -26,6 +27,7 @@ namespace API
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
             app.UseHttpsRedirection();
