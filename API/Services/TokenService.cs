@@ -11,13 +11,17 @@ namespace API.Services
     {
         public string CreateToken(AppUser user)
         {
-            var tokenKey = config["TokenKey"] ?? throw new Exception("Cannot access tokenKey from appsettings");
-            if (tokenKey.Length < 64) throw new Exception("TokenKey must be at least 64 characters long");
+            var tokenKey =
+                config["TokenKey"]
+                ?? throw new Exception("Cannot access tokenKey from appsettings");
+            if (tokenKey.Length < 64)
+                throw new Exception("TokenKey must be at least 64 characters long");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
             var claims = new List<Claim>
             {
-                new(ClaimTypes.NameIdentifier, user.UserName)
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.UserName),
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
@@ -26,7 +30,7 @@ namespace API.Services
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = creds
+                SigningCredentials = creds,
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
