@@ -37,7 +37,7 @@ namespace API.Controllers
                 unitOfWork.LikesRepository.DeleteLike(existingLike);
             }
 
-            if (await unitOfWork.LikesRepository.SaveChanges())
+            if (await unitOfWork.Complete())
                 return Ok();
 
             return BadRequest("Failed to update like");

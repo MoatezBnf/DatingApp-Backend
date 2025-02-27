@@ -46,7 +46,7 @@ namespace API.Controllers
 
             unitOfWork.MessageRepository.AddMessage(message);
 
-            if (await unitOfWork.UserRepository.SaveAllAsync())
+            if (await unitOfWork.Complete())
             {
                 return Ok(mapper.Map<MessageDto>(message));
             }

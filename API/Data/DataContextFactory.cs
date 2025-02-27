@@ -8,7 +8,9 @@ namespace API.Data
         public DataContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlite("Data Source=dating.db");
+            optionsBuilder.UseSqlServer(
+                "Server=localhost,1433;Database=DatingDB;User Id=SA;Password=Password@1;TrustServerCertificate=True"
+            );
 
             return new DataContext(optionsBuilder.Options);
         }
